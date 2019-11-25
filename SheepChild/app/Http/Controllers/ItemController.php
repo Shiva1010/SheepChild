@@ -28,7 +28,7 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
          $timeValidate = request()->validate([
             'item_name' => 'required',
             'sort_id' => 'required',
@@ -36,11 +36,14 @@ class ItemController extends Controller
             'price' => 'required',
         ]);
 
+
          $parameters = request()->all();
 
+        if($timeValidate) {
 
+            return response()->json(['msg' => '商品資料輸入錯誤'], 403);
 
-         if(!is_null($request['pic'])){
+        }elseif(!is_null($request['pic'])){
              $imageURL = request()->file('pic')->store('public');
              $parameters['pic'] = substr($imageURL, 7);
              $URL = asset('storage/' . $parameters['pic']);
@@ -64,6 +67,7 @@ class ItemController extends Controller
 
              return response()->json(['msg' => 'add item success!', 'data' => $timeCreate], 201);
          }
+
     }
 
     public function upload(Request $request)
