@@ -50,4 +50,8 @@ Route::group(['middleware' => ['auth:wolf']], function() {
 
 // 商品全部瀏覽、分類瀏覽
 Route::get('/items','ItemController@index');
+Route::post('/item','WolfController@store');//店家新增商品
+Route::put('/wolf/items/{id}','WolfController@update');//店家修改稱品
+Route::delete('/wolf/items/{id}','WolfController@destroy');//店家刪除稱品
+
 Route::get('/items/{sort_id}','ItemController@show');

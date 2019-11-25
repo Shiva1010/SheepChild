@@ -27,19 +27,21 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {   
-        $time = request()->validate([
+        $timeValidate = request()->validate([
             'item_name' => 'required',
             'sort_id' => 'required',
             'sort_name' => 'required',
             'price' => 'required',
         ]);
 
-        $time = request()->validate([
+        $timeCreate = Item::create([
             'item_name' => $request['item_name'],
             'sort_id' => $request['sort_id'],
             'sort_name' => $request['sort_name'],
             'price' => $request['price'],
         ]);
+
+        return response()->json(['msg' => '新增商品成功', 'item' => $timeCreate],201);
 
 
     }
@@ -64,7 +66,10 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::find($id)->first();
+
+        $itemUpdate = $item->update([
+            '']);
     }
 
     /**
