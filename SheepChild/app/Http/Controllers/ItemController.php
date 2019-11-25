@@ -40,23 +40,7 @@ class ItemController extends Controller
 
          $parameters = request()->all();
 
-<<<<<<< HEAD
-//        if($timeValidate) {
 
-//            return response()->json(['msg' => '商品資料輸入錯誤'], 403);
-//
-//        }else
-        if(!is_null($request['pic'])){
-             $imageURL = request()->file('pic')->store('public');
-             $parameters['pic'] = substr($imageURL, 7);
-             $URL = asset('storage/' . $parameters['pic']);
-             $have_pic_Create = Item::create([
-                 'item_name' => $request['item_name'],
-                 'sort_id' => $request['sort_id'],
-                 'sort_name' => $request['sort_name'],
-                 'price' => $request['price'],
-                 'pic' => $URL,
-=======
         if(!is_null($timeValidate)) {
 
             if(!is_null($request['pic'])){
@@ -79,7 +63,6 @@ class ItemController extends Controller
                      'sort_id' => $request['sort_id'],
                      'sort_name' => $request['sort_name'],
                      'price' => $request['price'],
->>>>>>> 549a6bc627ae3e312d338c95f1dfe2621d70be3d
                  ]);
 
                  return response()->json(['msg' => 'add item success!', 'data' => $timeCreate], 201);
