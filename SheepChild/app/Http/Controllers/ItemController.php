@@ -130,7 +130,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Item::find($id)->first();
+        $item = Item::find($id);
 
         $itemUpdate = $item->update($request->only(['item_name', 'sort_id', 'sort_name', 'price', 'stock','pic'])
         );
