@@ -18,8 +18,7 @@ class ItemController extends Controller
     {
         $AllItem = Item::orderBy('updated_at', 'desc')->get();
 
-
-        return response()->json(['allmagic'=>$AllItem]);
+        return response()->json(['items'=>$AllItem]);
     }
 
     /**
@@ -44,7 +43,7 @@ class ItemController extends Controller
                 'price' => $request['price'],
             ]);
 
-        return response()->json(['msg' => 'add item success!', 'data' => 'ok'],201);
+        return response()->json(['msg' => 'add item success!', 'data' => $timeCreate],201);
     }
 
     public function upload(Request $request)
@@ -102,7 +101,9 @@ class ItemController extends Controller
         $itemUpdate = $item->update($request->only(['item_name', 'sort_id', 'sort_name', 'price', 'stock'])
         );
 
-        return response()->json(['msg' => 'eite item success!', 'data' => $itemUpdate],201);
+        $updated = Item::find($id);
+
+        return response()->json(['msg' => 'edit item success!'],200);
     }
 
     /**
@@ -112,7 +113,7 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
         $item = Item::find($id)->delete();
 
         return response()->json(['msg' => 'delete success!'],200);
