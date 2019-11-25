@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Item;
+use App\Sheep;
+use App\Wolf;
 
 class ItemController extends Controller
 {
