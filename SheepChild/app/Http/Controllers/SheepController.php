@@ -113,8 +113,6 @@ class SheepController extends Controller
 
             $input = request()->all();
 
-
-
             // 驗證請求資料規則是否符合
             $validator = Validator::make($input, $rules);
 
@@ -128,6 +126,7 @@ class SheepController extends Controller
 
                 // 店家預設註冊給 1000000 元
                 $balance = 5000;
+
 
 
                 // hash password
@@ -145,8 +144,10 @@ class SheepController extends Controller
                     'msg' => '可愛的肥羊，註冊成功',
                     'create_date' => $create,
                 ]);
-
             }
+
+        } else {
+            return response()->json(['msg' => '此帳戶已被註冊'],403);
         }
     }
 

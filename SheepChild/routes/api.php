@@ -33,26 +33,25 @@ Route::prefix('/faker')->group(function () {
 
 
 
+
 // 羊（買家）的註冊跟登入
 Route::post('/register','SheepController@store');
 Route::post('/login','SheepController@login');
+
 
 // 狼（店家）的登入
 Route::post('/wolf/register','WolfController@store');
 Route::post('/wolf/login','WolfController@login');
 
+
 // 只有狼可以新增、修改、刪除商品
 Route::group(['middleware' => ['auth:wolf']], function() {
     Route::post('/wolf/items', 'ItemController@store');
-    Route::put('/items/wolf/{id}', 'ItemController@update');
-    Route::delete('/items/wolf/{id}', 'ItemController@destory');
+    Route::put('/wolf/items/{id}', 'ItemController@update');
+    Route::delete('/wolf/items/{id}', 'ItemController@destory');
 });
+
 
 // 商品全部瀏覽、分類瀏覽
 Route::get('/items','ItemController@index');
-Route::post('/wolf/item','ItemController@store');//店家新增商品
-Route::put('/wolf/items/{id}','ItemController@update');//店家修改稱品
-Route::delete('/wolf/items/{id}','ItemController@destroy');//店家刪除稱品
-Route::post('/wolf/items/photo_upload','ItemController@upload');//店家上傳圖片
-
 Route::get('/items/{sort_id}','ItemController@show');

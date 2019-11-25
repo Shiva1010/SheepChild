@@ -8,9 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Wolf extends Authenticatable
 {
-<<<<<<< HEAD
+
     protected $guarded = [];
-=======
+
     use Notifiable;
     protected $fillable=[
       'camp_name','account','api_token','balance','password'
@@ -19,5 +19,4 @@ class Wolf extends Authenticatable
       'password',
     ];
 
->>>>>>> ed4bb67d0cc4ccde11077c9692bc6bc912ae9b9f
 }
