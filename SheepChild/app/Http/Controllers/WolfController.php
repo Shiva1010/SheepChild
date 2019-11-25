@@ -101,7 +101,6 @@ class WolfController extends Controller
     public function store(Request $request)
     {
 
-        return response()->json(['msg' => 'add item success!', 'data' => 'ok'],201);
 
         // 確認是否有相同 account
         $check_account =Wolf::where('account', $request->account)->first();
@@ -167,15 +166,7 @@ class WolfController extends Controller
         //
     }
 
-    public function
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {   
 

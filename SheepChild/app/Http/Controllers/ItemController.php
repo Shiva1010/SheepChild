@@ -16,7 +16,10 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $AllItem = Item::orderBy('updated_at', 'desc')->get();
+
+
+        return response()->json(['allmagic'=>$AllItem]);
     }
 
     /**
@@ -59,9 +62,22 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($sort_id)
     {
-        //
+        $check_sort_id =Item::where('sort_id', $sort_id)->value('sort_id');
+
+        $item = Item::where('sort_id', $sort_id)->get();
+
+        if ($check_sort_id) {
+
+            return response()->json(['data' => $item]);
+
+        } else {
+
+            return response()->json(['message' => 'sort not found']);
+
+        }
+
     }
 
     /**
