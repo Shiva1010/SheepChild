@@ -100,11 +100,7 @@ class WolfController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 83c45def9f89c2c04abf959b4348136fd4783639
         // 確認是否有相同 account
         $check_account =Wolf::where('account', $request->account)->first();
 
