@@ -18,8 +18,8 @@ class CreateSheepTable extends Migration
             $table->string('name');
             $table->string('account')->unique();
             $table->string('password');
-            $table->integer('balance')->default(5000);
-            $table->string('api_token');
+            $table->integer('balance');
+            $table->string('api_token')->unique();
             $table->timestamps();
         });
     }

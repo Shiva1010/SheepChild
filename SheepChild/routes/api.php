@@ -38,6 +38,7 @@ Route::post('/register','SheepController@store');
 Route::post('/login','SheepController@login');
 
 // 狼（店家）的登入
+Route::post('/wolf/register','WolfController@store');
 Route::post('/wolf/login','WolfController@login');
 
 // 只有狼可以新增、修改、刪除商品
