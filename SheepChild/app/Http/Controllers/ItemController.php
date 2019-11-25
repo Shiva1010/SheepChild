@@ -40,11 +40,12 @@ class ItemController extends Controller
 
          $parameters = request()->all();
 
-        if($timeValidate) {
+//        if($timeValidate) {
 
-            return response()->json(['msg' => '商品資料輸入錯誤'], 403);
-
-        }elseif(!is_null($request['pic'])){
+//            return response()->json(['msg' => '商品資料輸入錯誤'], 403);
+//
+//        }else
+        if(!is_null($request['pic'])){
              $imageURL = request()->file('pic')->store('public');
              $parameters['pic'] = substr($imageURL, 7);
              $URL = asset('storage/' . $parameters['pic']);
