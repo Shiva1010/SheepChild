@@ -46,6 +46,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'wolf' => [
+            'driver' => 'token',
+            'provider' => 'wolves',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -70,6 +76,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
+        'wolves' => [
+                'driver' => 'eloquent',
+                'model' => App\Wolf::class,
+            ],
 
         // 'users' => [
         //     'driver' => 'database',
