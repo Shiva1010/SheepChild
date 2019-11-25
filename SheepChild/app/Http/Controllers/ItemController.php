@@ -35,7 +35,8 @@ class ItemController extends Controller
             'sort_name' => 'required',
             'price' => 'required',
         ]);
-
+         if($request->pic) {
+            dd('ok');
             $timeCreate = Item::create([
                 'item_name' => $request['item_name'],
                 'sort_id' => $request['sort_id'],
@@ -44,6 +45,7 @@ class ItemController extends Controller
             ]);
 
         return response()->json(['msg' => 'add item success!', 'data' => $timeCreate],201);
+        }
     }
 
     public function upload(Request $request)
@@ -114,8 +116,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {   
-        $item = Item::find($id)->delete();
 
-        return response()->json(['msg' => 'delete success!'],200);
+
     }
 }

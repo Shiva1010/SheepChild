@@ -49,8 +49,8 @@ Route::group(['middleware' => ['auth:wolf']], function() {
     Route::post('/wolf/items', 'ItemController@store');//店家新增商品
     Route::put('/wolf/items/{id}', 'ItemController@update');//店家修改商品
     Route::delete('/wolf/items/{id}', 'ItemController@destroy');//店家刪除商品
-    Route::post('/wolf/items/photo_upload','ItemController@upload');//店家上傳圖片
 });
+    Route::post('/wolf/items/photo_upload','ItemController@upload');//店家上傳圖片
 
 
 // 商品全部瀏覽、分類瀏覽
