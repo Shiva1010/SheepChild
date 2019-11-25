@@ -14,7 +14,7 @@ class CreateSheepItemTable extends Migration
     public function up()
     {
         Schema::create('sheep_item', function (Blueprint $table) {
-            $table->primary(['sheep_id', 'item_id']);
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('sheep_id');
             $table->integer('price');

@@ -26,8 +26,22 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $time = request()->validate([
+            'item_name' => 'required',
+            'sort_id' => 'required',
+            'sort_name' => 'required',
+            'price' => 'required',
+        ]);
+
+        $time = request()->validate([
+            'item_name' => $request['item_name'],
+            'sort_id' => $request['sort_id'],
+            'sort_name' => $request['sort_name'],
+            'price' => $request['price'],
+        ]);
+
+
     }
 
     /**
