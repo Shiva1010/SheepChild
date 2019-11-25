@@ -27,23 +27,30 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {   
-        $timeValidate = request()->validate([
+         $timeValidate = request()->validate([
             'item_name' => 'required',
             'sort_id' => 'required',
             'sort_name' => 'required',
             'price' => 'required',
         ]);
+        
+        
 
-        $timeCreate = Item::create([
-            'item_name' => $request['item_name'],
-            'sort_id' => $request['sort_id'],
-            'sort_name' => $request['sort_name'],
-            'price' => $request['price'],
-        ]);
+        if (request()->hasFile('image')){
 
-        return response()->json(['msg' => '新增商品成功', 'item' => $timeCreate],201);
+            $parameters = request()->all();
+            
+            $imageURL = request()->file('image')->store('public');
 
+            $timeCreate = Item::create([
+                'item_name' => $request['item_name'],
+                'sort_id' => $request['sort_id'],
+                'sort_name' => $request['sort_name'],
+                'price' => $request['price'],
+                'pic' => $request['image'] = substr($imageURL, 7)
+            ]);
 
+        }
     }
 
     /**
@@ -68,8 +75,10 @@ class ItemController extends Controller
     {
         $item = Item::find($id)->first();
 
-        $itemUpdate = $item->update([
-            '']);
+        $itemUpdate = $item->update($request->only(['item_name', 'sort_id', 'sort_name', 'price', 'stock'])
+        );
+
+        return response()->json(['msg' => 'eite item success!', 'data' => $itemUpdate],201);
     }
 
     /**
@@ -80,6 +89,8 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id)->delete();
+
+        return response()->json(['msg' => 'delete success!'],200);
     }
 }

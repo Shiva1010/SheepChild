@@ -100,34 +100,9 @@ class WolfController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        $timeValidate = request()->validate([
-            'item_name' => 'required',
-            'sort_id' => 'required',
-            'sort_name' => 'required',
-            'price' => 'required',
-        ]);
-        
-        
-
-        if (request()->hasFile('image')){
-
-            $parameters = request()->all();
-            
-            $imageURL = request()->file('image')->store('public');
-
-            $timeCreate = Item::create([
-                'item_name' => $request['item_name'],
-                'sort_id' => $request['sort_id'],
-                'sort_name' => $request['sort_name'],
-                'price' => $request['price'],
-                'pic' => $request['image'] = substr($imageURL, 7)
-            ]);
-
-        }
 
         return response()->json(['msg' => 'add item success!', 'data' => 'ok'],201);
-=======
+
         // 確認是否有相同 account
         $check_account =Wolf::where('account', $request->account)->first();
 
@@ -176,7 +151,7 @@ class WolfController extends Controller
 
             }
         }
->>>>>>> ed4bb67d0cc4ccde11077c9692bc6bc912ae9b9f
+
     }
 
   
@@ -203,12 +178,7 @@ class WolfController extends Controller
      */
     public function update(Request $request, $id)
     {   
-        $item = Item::find($id)->first();
 
-        $itemUpdate = $item->update($request->only(['item_name', 'sort_id', 'sort_name', 'price', 'stock'])
-        );
-
-        return response()->json(['msg' => 'eite item success!', 'data' => $itemUpdate],201);
     }
 
     /**
@@ -219,8 +189,6 @@ class WolfController extends Controller
      */
     public function destroy($id)
     {
-        $item = Item::find($id)->delete();
-
-        return response()->json(['msg' => 'delete success!'],200);
+ 
     }
 }
