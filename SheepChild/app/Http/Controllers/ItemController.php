@@ -35,53 +35,38 @@ class ItemController extends Controller
             'sort_name' => 'required',
             'price' => 'required',
         ]);
-<<<<<<< HEAD
-         if($request->pic) {
-            dd('ok');
-            $timeCreate = Item::create([
-                'item_name' => $request['item_name'],
-                'sort_id' => $request['sort_id'],
-                'sort_name' => $request['sort_name'],
-                'price' => $request['price'],
-            ]);
-
-        return response()->json(['msg' => 'add item success!', 'data' => $timeCreate],201);
-        }
-=======
 
 
          $parameters = request()->all();
 
-        if($timeValidate) {
+        if(!is_null($timeValidate)) {
 
-            return response()->json(['msg' => '商品資料輸入錯誤'], 403);
+            if(!is_null($request['pic'])){
+                 $imageURL = request()->file('pic')->store('public');
+                 $parameters['pic'] = substr($imageURL, 7);
+                 $URL = asset('storage/' . $parameters['pic']);
+                 $have_pic_Create = Item::create([
+                     'item_name' => $request['item_name'],
+                     'sort_id' => $request['sort_id'],
+                     'sort_name' => $request['sort_name'],
+                     'price' => $request['price'],
+                     'pic' => $URL,
+                     ]);
 
-        }elseif(!is_null($request['pic'])){
-             $imageURL = request()->file('pic')->store('public');
-             $parameters['pic'] = substr($imageURL, 7);
-             $URL = asset('storage/' . $parameters['pic']);
-             $have_pic_Create = Item::create([
-                 'item_name' => $request['item_name'],
-                 'sort_id' => $request['sort_id'],
-                 'sort_name' => $request['sort_name'],
-                 'price' => $request['price'],
-                 'pic' => $URL,
+                 return response()->json(['msg' => 'add item success!', 'data' => $have_pic_Create], 201);
+             }else {
+
+                 $timeCreate = Item::create([
+                     'item_name' => $request['item_name'],
+                     'sort_id' => $request['sort_id'],
+                     'sort_name' => $request['sort_name'],
+                     'price' => $request['price'],
                  ]);
 
-             return response()->json(['msg' => 'add item success!', 'data' => $have_pic_Create], 201);
-         }else {
+                 return response()->json(['msg' => 'add item success!', 'data' => $timeCreate], 201);
+             }
 
-             $timeCreate = Item::create([
-                 'item_name' => $request['item_name'],
-                 'sort_id' => $request['sort_id'],
-                 'sort_name' => $request['sort_name'],
-                 'price' => $request['price'],
-             ]);
-
-             return response()->json(['msg' => 'add item success!', 'data' => $timeCreate], 201);
-         }
-
->>>>>>> 1401c542cecd3dbd2a79a111cdbb7ea0aed83426
+        } return response()->json(['msg' => '商品資料輸入錯誤'], 403);
     }
 
     public function upload(Request $request)
@@ -161,10 +146,6 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {   
-<<<<<<< HEAD
-
-
-=======
         $item = Item::find($id);
 
         if (!is_null($item)) {
@@ -173,6 +154,6 @@ class ItemController extends Controller
         }else{
             return response()->json(['msg' => '商品刪除失敗'], 403);
         }
->>>>>>> 1401c542cecd3dbd2a79a111cdbb7ea0aed83426
+
     }
 }
