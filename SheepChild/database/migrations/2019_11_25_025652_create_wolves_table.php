@@ -18,7 +18,7 @@ class CreateWolvesTable extends Migration
             $table->string('camp_name');
             $table->string('account')->unique();
             $table->string('password');
-            $table->string('api_token');
+            $table->string('api_token')->unique();
             $table->integer('balance');
             $table->timestamps();
         });
