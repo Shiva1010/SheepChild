@@ -15,6 +15,11 @@ class CreateWolvesTable extends Migration
     {
         Schema::create('wolves', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('camp_name');
+            $table->string('account')->unique();
+            $table->string('password');
+            $table->string('api_token');
+            $table->integer('balance');
             $table->timestamps();
         });
     }
