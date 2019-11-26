@@ -13,7 +13,10 @@ class Sheep extends Authenticatable
 
     use Notifiable;
 
-
+    public function totals()
+    {
+        return $this->belongsToMany('App\Item')->withPivot('total');
+    }
 
     protected $fillable=[
         'name','account','api_token','balance','password','score'
@@ -25,7 +28,7 @@ class Sheep extends Authenticatable
 
     public function items()
     {
-    	return $this->belongsToMany('App\Item');
+    	return $this->belongsToMany('App\Item')->withTimestamps();
     }
 
 }

@@ -27,6 +27,26 @@ class SheepItemController extends Controller
         return response()->json(['data' => $sheep]);
     }
 
+    public function total()//算出sheeps的總花費＝wolf的銷售總金額
+    {   
+        $count = 0;
+        $sheeps = Sheep::all();//collection [{Sheep},{Sheep},]
+
+        // for($i=0; $i<$sheeps->length;$i++;){
+        //     $sheeps[i]->stocks();
+        // }
+        foreach ($sheeps as $sheep) {
+        
+        $totals = $sheep->totals;
+        
+            foreach($totals as $total) {
+                $count += $total->pivot->total;
+            }
+        }
+
+        return response()->json(['data' => $count]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,6 +58,8 @@ class SheepItemController extends Controller
         $item = Item::where('id', $request->item_id)->first();
 
         $sheep = Sheep::where('account', $request->account)->first();
+
+        $wolf = Wolf::find(1);
 
         $stock = $request->stock;
 
@@ -56,9 +78,12 @@ class SheepItemController extends Controller
 
         $addScore = $sheep->update(['score' => $sheep->score + $total]);
 
-        $updateBalance = $sheep->update(['balance' => $sheep->balance - $total]);
+        $updateSheepBalance = $sheep->update(['balance' => $sheep->balance - $total]);
+
+        $updateWolfBalance = $wolf->update(['balance' => $wolf->balance + $total]);
 
         $sheep['item'] = $item->only(['id', 'sort_id', 'item_name']);//show respones
+        
         
         // $sort = Item::where('sort_id', $item->sort_id)->with('sort')->first();
 
