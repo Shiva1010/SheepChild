@@ -34,6 +34,10 @@ Route::prefix('/faker')->group(function () {
 
 
 
+
+Route::get('/items','ItemController@index');                // 商品全部瀏覽
+Route::get('/items/{sort_id}','ItemController@show');       // 商品分類瀏覽
+
 // 羊（買家）的註冊跟登入
 Route::post('/register','SheepController@store');
 Route::post('/login','SheepController@login');
@@ -46,12 +50,19 @@ Route::post('/wolf/login','WolfController@login');
 
 // 只有狼可以新增、修改、刪除商品
 Route::group(['middleware' => ['auth:wolf']], function() {
-    Route::put('/wolf/items/{id}', 'ItemController@update');//店家修改商品
-    Route::delete('/wolf/items/{id}', 'ItemController@destroy');//店家刪除商品
+    Route::post('/wolf/items', 'ItemController@store');             // 店家新增商品
+    Route::put('/wolf/items/{id}', 'ItemController@update');        // 店家修改商品
+    Route::delete('/wolf/items/{id}', 'ItemController@destroy');    // 店家刪除商品
+    Route::get('/wolf/sheepitem','SheepItemController@index');      // 查看所有購買紀錄
 });
-    Route::post('/wolf/items', 'ItemController@store');//店家新增商品
 
 
-// 商品全部瀏覽、分類瀏覽
-Route::get('/items','ItemController@index');
-Route::get('/items/{sort_id}','ItemController@show');
+
+
+// 羊的購買查詢
+Route::group(['middleware' => ['auth:sheep']],function (){
+   Route::post('/sheepitem','SheepItemController@store');           // 買家購買商品
+   Route::get('/sheepitem','SheepItemController@show');             // 查看買家自身所有購買紀錄
+});
+
+
