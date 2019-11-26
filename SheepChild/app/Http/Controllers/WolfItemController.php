@@ -15,8 +15,53 @@ class WolfItemController extends Controller
         $sellstock = DB::table('item_sheep')->sum('stock');
         $selltoltal = DB::table('item_sheep')->sum('total');
 
-        return response()->json(['msg'=>'狼先生，這是目前銷售的情形','all_stock'=>$sellstock,'all_total'=>$selltoltal]);
 
+
+        if ($selltoltal < 1000) {
+
+            return response()->json([
+                'msg' => '狼先生，您這樣店會倒的',
+                'lv' => 0,
+                'all_stock'=>$sellstock,
+                'all_total'=>$selltoltal,
+            ]);
+
+        }elseif ($selltoltal < 2000) {
+            return response()->json([
+                'msg' => '狼先生，請再多努力賺錢',
+                'lv' => 1,
+                'all_stock'=>$sellstock,
+                'all_total'=>$selltoltal,
+            ]);
+        }elseif ($selltoltal < 3000) {
+            return response()->json([
+                'msg' => '狼先生，你是不是不太適合當商人',
+                'lv' => 2,
+                'all_stock'=>$sellstock,
+                'all_total'=>$selltoltal,
+            ]);
+        }elseif ($selltoltal < 4000) {
+            return response()->json([
+                'msg' => '狼先生，我們稍微可以活久一點了',
+                'lv' => 3,
+                'all_stock'=>$sellstock,
+                'all_total'=>$selltoltal,
+            ]);
+        }elseif  ($selltoltal < 5000) {
+            return response()->json([
+                'msg' => '狼先生，越來越有錢了呢',
+                'lv' => 4,
+                'all_stock'=>$sellstock,
+                'all_total'=>$selltoltal,
+            ]);
+        }else {
+            return response()->json([
+                'msg' => '狼先生，您好棒喔！',
+                'lv' => 5,
+                'all_stock'=>$sellstock,
+                'all_total'=>$selltoltal,
+            ]);
+        }
     }
 
 
