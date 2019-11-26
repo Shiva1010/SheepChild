@@ -32,11 +32,14 @@ Route::prefix('/faker')->group(function () {
 });
 
 
+Route::post('/sorts','SortController@store');              // 建立商品分類
+
 
 
 
 Route::get('/items','ItemController@index');                // 商品全部瀏覽
 Route::get('/items/{sort_id}','ItemController@show');       // 商品分類瀏覽
+Route::get('/sorts','SortController@index');               // 查看所有商品分類
 
 // 羊（買家）的註冊跟登入
 Route::post('/register','SheepController@store');
@@ -55,6 +58,7 @@ Route::group(['middleware' => ['auth:wolf']], function() {
     Route::delete('/wolf/items/{id}', 'ItemController@destroy');      // 店家刪除商品
     Route::post('/wolf/items/photo_upload', 'ItemController@upload'); // 店家已上傳商品再多新增圖片
     Route::get('/wolf/sheepitem','SheepItemController@index');        // 查看所有購買紀錄
+    Route::post('/sorts','SortController@store');                     // 建立商品分類
 });
 
 
