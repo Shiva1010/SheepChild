@@ -52,6 +52,12 @@ Route::group(['middleware' => ['auth:wolf']], function() {
 });
 
 
+
 // 商品全部瀏覽、分類瀏覽
 Route::get('/items','ItemController@index');
 Route::get('/items/{sort_id}','ItemController@show');
+
+//羊（買家）的購買動作
+Route::post('/items/buy', 'SheepItemController@store');
+Route::get('/sheep/history/{id}', 'SheepItemController@index');
+

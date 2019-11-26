@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\SheepItem;
 use App\Item;
+use App\Sheep;
+use App\Wolf;
 use Illuminate\Http\Request;
 
 
@@ -13,9 +16,15 @@ class SheepItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $sheep = Sheep::find($id);
+
+        $sheepItem = $sheep->items()->get();
+
+        $sheep['item'] = $sheepItem;
+
+        return response()->json(['data' => $sheep]);
     }
 
     /**
@@ -25,9 +34,24 @@ class SheepItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        $item = Item::where('id', $request->item_id)->first();
 
+        $sheep = Sheep::where('account', $request->account)->first();
 
+        $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach($request->item_id);
+
+        $stock = $request->stock;
+
+        // $sheep = Sheep::find(1);
+        // $sheep->items;
+        // $sheepItem = $sheep->items()->first();
+       
+        $sheep['item'] = $item;
+
+        $sheep['stock'] = $stock;
+
+        return response()->json(['msg' => 'buy item success', 'data' => $sheep]);
     }
 
     /**

@@ -12,11 +12,14 @@ class Sheep extends Authenticatable
     protected $guarded = [];
 
     use Notifiable;
-    protected $fillable=[
-        'name','account','api_token','balance','password'
-    ];
+
     protected $hidden=[
         'password',
     ];
+
+    public function items()
+    {
+    	return $this->belongsToMany('App\Item');
+    }
 
 }
