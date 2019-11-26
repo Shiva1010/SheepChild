@@ -12,4 +12,11 @@ class Sort extends Model
     protected $fillable=[
       'name',
     ];
+
+    public function item()
+    {
+        // 不同的 nutrients 屬於同一種 flowers
+        return $this->belongsTo('App\Item','sort_id','id');
+    }
+
 }

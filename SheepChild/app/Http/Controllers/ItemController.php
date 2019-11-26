@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Item;
+use App\Sort;
 use App\Sheep;
 use App\Wolf;
 
@@ -104,15 +105,20 @@ class ItemController extends Controller
     {
         $check_sort_id =Item::where('sort_id', $sort_id)->value('sort_id');
 
-        $item = Item::where('sort_id', $sort_id)->get();
 
         if ($check_sort_id) {
+
+            $item = Item::where('sort_id',$sort_id)
+                ->with('sort')
+                ->get();
+
+            return $item;
 
             return response()->json(['data' => $item]);
 
         } else {
 
-            return response()->json(['message' => 'sort not found']);
+            return response()->json(['message' => 'sort not found'],403);
 
         }
 
