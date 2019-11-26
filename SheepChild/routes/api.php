@@ -52,12 +52,10 @@ Route::post('/wolf/login','WolfController@login');
 
 
 // 只有狼可以新增、修改、刪除商品
-Route::group(['middleware' => ['auth:wolf']], function() {
-<<<<<<< HEAD
-    Route::post('/wolf/items', 'ItemController@store');//店家新增商品
-    Route::put('/wolf/items/{id}', 'ItemController@update');//店家修改商品
-    Route::delete('/wolf/items/{id}', 'ItemController@destroy');//店家刪除商品
-});
+
+
+
+
 
 
 
@@ -69,7 +67,7 @@ Route::get('/items/{sort_id}','ItemController@show');
 Route::post('/items/buy', 'SheepItemController@store');
 Route::get('/sheep/history/{id}', 'SheepItemController@index');
 
-=======
+Route::group(['middleware' => ['auth:wolf']], function() {
     Route::post('/wolf/items', 'ItemController@store');               // 店家新增商品
     Route::put('/wolf/items/{id}', 'ItemController@update');          // 店家修改商品
     Route::delete('/wolf/items/{id}', 'ItemController@destroy');      // 店家刪除商品
@@ -88,4 +86,4 @@ Route::group(['middleware' => ['auth:sheep']],function (){
 });
 
 
->>>>>>> 8fa979a1951c469954c43285eaa25f6829aeab02
+
