@@ -13,7 +13,7 @@ class Sheep extends Authenticatable
 
     use Notifiable;
     protected $fillable=[
-        'name','account','api_token','balance','password'
+        'name','account','api_token','balance','password','score'
     ];
     protected $hidden=[
         'password',

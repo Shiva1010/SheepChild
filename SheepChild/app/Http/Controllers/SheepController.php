@@ -63,11 +63,48 @@ class SheepController extends Controller
 
                     $now_sheep = Sheep::where('account', $request->account)->first();
 
-                    return response()->json([
-                        'msg' => '可愛的小綿羊，歡迎光臨，今天想要買點什麼呢？',
+                    $score = $now_sheep ->score;
+
+                    if ($score < 2000) {
+
+                        return response()->json([
+                            'msg' => '可愛的小綿羊，歡迎光臨，今天想要買點什麼呢？',
+                            '等級' => 0,
+                            'now_flower' => $now_sheep,
+                        ]);
+
+                    }elseif ($score < 5000) {
+                        return response()->json([
+                            'msg' => '可愛的小肥羊，歡迎光臨，今天想要買點什麼呢？',
+                            '等級' => 1,
+                            'now_flower' => $now_sheep,
+                        ]);
+                    }elseif ($score < 10000) {
+                        return response()->json([
+                        'msg' => '可愛的大肥羊，歡迎光臨，今天想要買點什麼呢？',
+                        '等級' => 2,
                         'now_flower' => $now_sheep,
                     ]);
 
+                    }elseif ($score < 20000) {
+                        return response()->json([
+                            'msg' => '可愛的超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
+                            '等級' => 3,
+                            'now_flower' => $now_sheep,
+                        ]);
+                    }elseif  ($score < 30000) {
+                        return response()->json([
+                            'msg' => '可愛的無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
+                            '等級' => 4,
+                            'now_flower' => $now_sheep,
+                        ]);
+                    }else {
+                        return response()->json([
+                            'msg' => '可愛的宇宙無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
+                            '等級' => 5,
+                            'now_flower' => $now_sheep,
+                        ]);
+                    }
                 } else {
 
                     return response()->json(['msg' => '密碼錯誤'],403);
@@ -126,6 +163,7 @@ class SheepController extends Controller
 
                 // 店家預設註冊給 1000000 元
                 $balance = 5000;
+                $score = 35000;
 
 
 
@@ -138,6 +176,7 @@ class SheepController extends Controller
                     'password' => $HashPwd,
                     'balance' => $balance,
                     'api_token' => $api_token,
+                    'score' => $score,
                 ]);
 
                 return response()->json([
