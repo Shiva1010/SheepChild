@@ -52,6 +52,12 @@ return [
             'provider' => 'wolves',
             'hash' => false,
         ],
+
+        'sheep' => [
+            'driver' => 'token',
+            'provider' => 'sheep',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -81,6 +87,11 @@ return [
                 'driver' => 'eloquent',
                 'model' => App\Wolf::class,
             ],
+
+        'sheep' => [
+            'driver' => 'eloquent',
+            'model' => App\Sheep::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

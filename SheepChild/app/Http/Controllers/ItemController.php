@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use App\Item;
+use App\Sort;
 use App\Sheep;
 use App\Wolf;
 
@@ -33,12 +34,13 @@ class ItemController extends Controller
          $timeValidate = request()->validate([
             'item_name' => 'required',
             'sort_id' => 'required',
-            'sort_name' => 'required',
             'price' => 'required',
+             'stock' => 'required',
         ]);
 
 
          $parameters = request()->all();
+
 
         if(!is_null($timeValidate)) {
 
@@ -49,8 +51,8 @@ class ItemController extends Controller
                  $have_pic_Create = Item::create([
                      'item_name' => $request['item_name'],
                      'sort_id' => $request['sort_id'],
-                     'sort_name' => $request['sort_name'],
                      'price' => $request['price'],
+                     'stock' => $request['stock'],
                      'pic' => $URL,
                      ]);
 
@@ -60,8 +62,8 @@ class ItemController extends Controller
                  $timeCreate = Item::create([
                      'item_name' => $request['item_name'],
                      'sort_id' => $request['sort_id'],
-                     'sort_name' => $request['sort_name'],
                      'price' => $request['price'],
+                     'stock' => $request['stock'],
                  ]);
 
                  return response()->json(['msg' => 'add item success!', 'data' => $timeCreate], 201);
@@ -106,19 +108,26 @@ class ItemController extends Controller
     {
         $check_sort_id =Item::where('sort_id', $sort_id)->value('sort_id');
 
-        $item = Item::where('sort_id', $sort_id)->get();
 
         if ($check_sort_id) {
+
+            $item = Item::where('sort_id',$sort_id)
+                ->with('sort')
+                ->get();
+
+            return $item;
 
             return response()->json(['data' => $item]);
 
         } else {
 
-            return response()->json(['message' => 'sort not found']);
+            return response()->json(['message' => 'sort not found'],403);
 
         }
 
     }
+
+
 
     /**
      * Update the specified resource in storage.
