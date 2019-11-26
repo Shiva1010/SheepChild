@@ -39,17 +39,28 @@ class SheepItemController extends Controller
 
         $sheep = Sheep::where('account', $request->account)->first();
 
-        $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach($request->item_id);
-
         $stock = $request->stock;
 
-        // $sheep = Sheep::find(1);
-        // $sheep->items;
-        // $sheepItem = $sheep->items()->first();
-       
-        $sheep['item'] = $item;
+        $itemStock = Item::where('id',$request->item_id)->first()->stock;
 
-        $sheep['stock'] = $stock;
+        $downItemStock = $itemStock - $stock;
+
+        $updateItemStock = $item->update(['stock' => $downItemStock]);
+
+        $total = $request->stock * $item->price;
+
+        $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach([
+
+            $request->item_id => ['price' => $item->price, 'stock' => $stock, 'total' => $total ],
+        ]);
+
+        $addScore = $sheep->update(['score' => $sheep->score + $total]);
+
+        $updateBalance = $sheep->update(['balance' => $sheep->balance - $total]);
+
+        $sheep['item'] = $item->only(['id', 'sort_id', 'item_name']);//show respones
+        
+        // $sort = Item::where('sort_id', $item->sort_id)->with('sort')->first();
 
         return response()->json(['msg' => 'buy item success', 'data' => $sheep]);
     }
