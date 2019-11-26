@@ -33,7 +33,6 @@ class ItemController extends Controller
          $timeValidate = request()->validate([
             'item_name' => 'required',
             'sort_id' => 'required',
-            'sort_name' => 'required',
             'price' => 'required',
         ]);
 
@@ -50,7 +49,6 @@ class ItemController extends Controller
                  $have_pic_Create = Item::create([
                      'item_name' => $request['item_name'],
                      'sort_id' => $request['sort_id'],
-                     'sort_name' => $request['sort_name'],
                      'price' => $request['price'],
                      'pic' => $URL,
                      ]);
@@ -61,7 +59,6 @@ class ItemController extends Controller
                  $timeCreate = Item::create([
                      'item_name' => $request['item_name'],
                      'sort_id' => $request['sort_id'],
-                     'sort_name' => $request['sort_name'],
                      'price' => $request['price'],
                  ]);
 
