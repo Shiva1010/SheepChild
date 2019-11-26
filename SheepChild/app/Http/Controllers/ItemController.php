@@ -35,6 +35,7 @@ class ItemController extends Controller
             'item_name' => 'required',
             'sort_id' => 'required',
             'price' => 'required',
+             'stock' => 'required',
         ]);
 
 
@@ -51,6 +52,7 @@ class ItemController extends Controller
                      'item_name' => $request['item_name'],
                      'sort_id' => $request['sort_id'],
                      'price' => $request['price'],
+                     'stock' => $request['stock'],
                      'pic' => $URL,
                      ]);
 
@@ -61,6 +63,7 @@ class ItemController extends Controller
                      'item_name' => $request['item_name'],
                      'sort_id' => $request['sort_id'],
                      'price' => $request['price'],
+                     'stock' => $request['stock'],
                  ]);
 
                  return response()->json(['msg' => 'add item success!', 'data' => $timeCreate], 201);
