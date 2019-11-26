@@ -59,9 +59,6 @@ Route::post('/wolf/login','WolfController@login');
 Route::get('/items','ItemController@index');
 Route::get('/items/{sort_id}','ItemController@show');
 
-//羊（買家）的購買動作
-Route::post('/items/buy', 'SheepItemController@store');
-Route::get('/sheep/history/{id}', 'SheepItemController@index');
 
 
 // 只有狼可以新增、修改、刪除商品
@@ -76,15 +73,8 @@ Route::group(['middleware' => ['auth:wolf']], function() {
 });
 
 
-
-
 // 羊的購買查詢
 Route::group(['middleware' => ['auth:sheep']],function (){
    Route::post('/sheepitem','SheepItemController@store');           // 買家購買商品
-   Route::get('/sheepitem','SheepItemController@show');             // 查看買家自身所有購買紀錄
+   Route::get('/sheepitem/{sheep_id}','SheepItemController@index');             // 查看買家自身所有購買紀錄
 });
-
-
-
-
-
