@@ -55,10 +55,6 @@ Route::post('/wolf/login','WolfController@login');
 
 
 
-
-
-
-
 // 商品全部瀏覽、分類瀏覽
 Route::get('/items','ItemController@index');
 Route::get('/items/{sort_id}','ItemController@show');
@@ -75,7 +71,8 @@ Route::group(['middleware' => ['auth:wolf']], function() {
     Route::delete('/wolf/items/{id}', 'ItemController@destroy');      // 店家刪除商品
     Route::post('/wolf/items/photo_upload', 'ItemController@upload'); // 店家已上傳商品再多新增圖片
     Route::get('/wolf/sheepitem','SheepItemController@index');        // 查看所有購買紀錄
-    Route::post('/sorts','SortController@store');                     // 建立商品分類
+    Route::post('/sorts','SortController@store');
+    Route::get('/wolfitem','WolfItemController@selltotal');           // 查詢目前總銷售記錄
 });
 
 
@@ -86,6 +83,8 @@ Route::group(['middleware' => ['auth:sheep']],function (){
    Route::post('/sheepitem','SheepItemController@store');           // 買家購買商品
    Route::get('/sheepitem','SheepItemController@show');             // 查看買家自身所有購買紀錄
 });
+
+
 
 
 

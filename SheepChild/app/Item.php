@@ -11,7 +11,9 @@ class Item extends Model
 
     public function items()
     {
+
         return $this->belongsToMany('App\Sheep');
+
     }
 
     public function sort()
