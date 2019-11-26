@@ -10,6 +10,7 @@ use App\Wolf;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Str;
+use Illuminate\Support\Facades\DB;
 
 
 class SheepController extends Controller
@@ -200,6 +201,16 @@ class SheepController extends Controller
     {
         //
     }
+
+    public function allbuy($sheep_id)
+    {
+        $sheep =Sheep::where('id',$sheep_id)->first();
+
+        $allbuy = DB::table('item_sheep')->where('sheep_id',$sheep_id)->get();
+
+        return response()->json(['msg'=>'買家所有購買的物品','sheep'=>$sheep,'SheepAllBuy'=>$allbuy]);
+    }
+
 
     /**
      * Update the specified resource in storage.
