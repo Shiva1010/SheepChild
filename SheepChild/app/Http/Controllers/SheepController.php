@@ -84,6 +84,7 @@ class SheepController extends Controller
                             'lv' => 0,
                             'now_flower' => $now_sheep,
                             'last_lv' => $last_lv_score01,
+                            'api_token' => $api_token,
                             ]);
 
                     }elseif ($score < $lv02) {
@@ -95,6 +96,7 @@ class SheepController extends Controller
                             'lv' => 1,
                             'now_flower' => $now_sheep,
                             'last_lv' => $last_lv_score02,
+                            'api_token' => $api_token,
                             ]);
 
                     }elseif ($score < $lv03) {
@@ -106,6 +108,7 @@ class SheepController extends Controller
                             'lv' => 2,
                             'now_flower' => $now_sheep,
                             'last_lv' => $last_lv_score03,
+                            'api_token' => $api_token,
                             ]);
 
                     }elseif ($score < $lv04) {
@@ -117,6 +120,7 @@ class SheepController extends Controller
                             'lv' => 3,
                             'now_flower' => $now_sheep,
                             'last_lv' => $last_lv_score04,
+                            'api_token' => $api_token,
                             ]);
 
                     }elseif  ($score < $lv05) {
@@ -128,6 +132,7 @@ class SheepController extends Controller
                             'lv' => 4,
                             'now_flower' => $now_sheep,
                             'last_lv' => $last_lv_score05,
+                            'api_token' => $api_token,
                             ]);
 
                     }else {
@@ -136,6 +141,7 @@ class SheepController extends Controller
                             'lv' => 5,
                             'now_flower' => $now_sheep,
                             'last_lv' => $max,
+                            'api_token' => $api_token,
                             ]);
 
                     }
