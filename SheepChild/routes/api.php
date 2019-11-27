@@ -58,6 +58,7 @@ Route::post('/wolf/login','WolfController@login');
 // 商品全部瀏覽、分類瀏覽
 Route::get('/items','ItemController@index');
 Route::get('/items/{sort_id}','ItemController@show');
+Route::get('/showitems/{item_id}','ItemController@showitem');
 
 
 

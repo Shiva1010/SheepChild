@@ -127,6 +127,24 @@ class ItemController extends Controller
 
     }
 
+    public function showitem($item_id)
+    {
+        $item =Item::where('id', $item_id)->first();
+
+
+        if ($item) {
+
+
+            return response()->json(['data' => $item]);
+
+        } else {
+
+            return response()->json(['mese' => 'item not found'],403);
+
+        }
+
+    }
+
 
 
     /**
