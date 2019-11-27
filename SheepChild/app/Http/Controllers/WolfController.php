@@ -29,6 +29,8 @@ class WolfController extends Controller
 
         $validator = Validator::make($input, $rules);
 
+
+
         if ($validator->fails()) {
 
             return response()->json(['msg' => $validator->errors()],403);
