@@ -240,8 +240,7 @@ class SheepController extends Controller
     {
         $sheep =Sheep::where('id',$sheep_id)->first();
 
-        $allbuy = DB::table('item_sheep')->where('sheep_id',$sheep_id)->join('items','item_sheep.item_id','=','items.id')->get();
-
+        $allbuy = DB::table('item_sheep')->where('sheep_id',$sheep_id)->join('items','item_sheep.item_id','=','items.id')->select('item_sheep.id','item_sheep.item_id','item_sheep.price','item_sheep.stock','item_sheep.total','items.item_name','items.pic')->get();
 
 
         return response()->json(['msg'=>'買家所有購買的物品','sheep'=>$sheep,'SheepAllBuy'=>$allbuy]);

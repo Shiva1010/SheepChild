@@ -20,7 +20,7 @@ class SheepItemController extends Controller
     {
         $sheep = Sheep::find($id);
 
-        $sheepItem = $sheep->items()->get();
+        $sheepItem = $sheep->items()->paginate(10);
 
         $sheep['item'] = $sheepItem;
 
