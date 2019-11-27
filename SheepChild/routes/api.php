@@ -86,3 +86,6 @@ Route::group(['middleware' => ['auth:sheep']],function (){
 });
 
 
+Route::post('/userbuy','BaseController@userbuy');
+
+Route::post('/SheepBaseBalance','BaseController@SheepBaseBalance');
