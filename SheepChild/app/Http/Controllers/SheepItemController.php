@@ -7,6 +7,9 @@ use App\Item;
 use App\Sheep;
 use App\Wolf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use DB;
+
 
 
 class SheepItemController extends Controller
@@ -36,9 +39,9 @@ class SheepItemController extends Controller
         //     $sheeps[i]->stocks();
         // }
         foreach ($sheeps as $sheep) {
-        
-        $totals = $sheep->totals;
-        
+
+            $totals = $sheep->totals;
+
             foreach($totals as $total) {
                 $count += $total->pivot->total;
             }
@@ -53,6 +56,7 @@ class SheepItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {   
         $item = Item::where('id', $request->item_id)->first();
@@ -61,66 +65,104 @@ class SheepItemController extends Controller
 
         $wolf = Wolf::find(1);
 
+        
+
+        
+        // dd(count($achieve2));
+
+        if(!$item){
+
+            return response()->json(['msg' => 'this item does not exit']);
+
+        }else if($item->stock <= 0) {
+
+            return response()->json(['msg' => 'stock is empty']);
+
+        }
+
+        $stockResult = $item->stock - $request->stock;
+
+        if($stockResult < 0){
+
+            return response()->json(['msg' => 'stock is not enough to sell']);
+
+        }
+
         $stock = $request->stock;
 
-        $itemStock = Item::where('id',$request->item_id)->first()->stock;
-
-        $downItemStock = $itemStock - $stock;
-
-        $updateItemStock = $item->update(['stock' => $downItemStock]);
+        $itemStock = $item->stock;
 
         $total = $request->stock * $item->price;
 
-        $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach([
 
-            $request->item_id => ['price' => $item->price, 'stock' => $stock, 'total' => $total ],
-        ]);
 
-        $addScore = $sheep->update(['score' => $sheep->score + $total]);
+        DB::transaction(function () use ($request, $item, $total, $stockResult, $sheep, $wolf){
 
-        $updateSheepBalance = $sheep->update(['balance' => $sheep->balance - $total]);
+            $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach([
 
-        $updateWolfBalance = $wolf->update(['balance' => $wolf->balance + $total]);
+                $request->item_id => ['price' => $item->price, 'stock' => $request->stock, 'total' => $total],
+            ]);
 
-        $sheep['item'] = $item->only(['id', 'sort_id', 'item_name']);//show respones
+            $updateItemStock = $item->update(['stock' => $stockResult]);
+
+            $addScore = $sheep->update(['score' => $sheep->score + $total, 'balance' => $sheep->balance - $total]);
+
+            $updateWolfBalance = $wolf->update(['balance' => $wolf->balance + $total]);
+
+        });  
+
+        $achieve1 = DB::table('item_sheep')->where(function($query)use ($sheep){
+
+            $query->Where('sheep_id', '=', $sheep->id);
+            $query->Where('item_id', '=', '90');
+
+
+        })->get();
+
+
+
+        $achieve2 = DB::table('item_sheep')->where(function($query)use ($sheep){
+
+            $query->Where('sheep_id', '=', $sheep->id);
+            $query->Where('item_id', '=', '91');
+
+
+        })->get();
+
         
+        $secretItem = DB::table('item_sheep')->where(function($query)use ($sheep){
+
+            $query->Where('sheep_id', '=', $sheep->id);
+            $query->Where('item_id', '=', '87');
+
+
+        })->get();
+
+        $achieve1 = count($achieve1);
+        $achieve2 = count($achieve2);
+        $secretItem = count($secretItem);
+
+        if($achieve1 && $achieve2 && !$secretItem) {
+
+                    $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach([
+
+                    17 => ['price' => 0, 'stock' => 1, 'total' => 0],
+                    ]);
+
+                    $sheep['item'] = $item->only(['id', 'sort_id', 'item_name']);//show respones
+
+                    $sheep['achevement'] = "恭喜得到深水炸彈！";//show respones
+
+                    return response()->json(['msg' => 'buy item success', 'data' => $sheep],555);
+
+        } else
+
+            $sheep['item'] = $item->only(['id', 'sort_id', 'item_name']);//show respones
+
+            return response()->json(['msg' => 'buy item success', 'data' => $sheep],201);
+
+        //  if(!count($achieve1)>0 && count($achieve2)>0){
+        // }return response()->json(['msg' => 'your achievement']);
         
-        // $sort = Item::where('sort_id', $item->sort_id)->with('sort')->first();
-
-        return response()->json(['msg' => 'buy item success', 'data' => $sheep]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

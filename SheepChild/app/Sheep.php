@@ -25,12 +25,17 @@ class Sheep extends Authenticatable
     ];
 
     protected $hidden=[
-        'password',
+        'password', 'api_token'
     ];
 
     public function items()
     {
     	return $this->belongsToMany('App\Item')->withTimestamps();
+    }
+
+    public function secretItems()
+    {
+        return $this->belongsToMany('App\Item')->wherePivot(['item_name', 1]);
     }
 
 }
