@@ -15,7 +15,7 @@ class BaseController extends Controller
             $key = $request['key'];
             $shop_account = 'arcadia@email.com';
             $amount = 300;
-            $isShop = 1;
+
 
 //            if (env('pass_status')) {
 
@@ -29,7 +29,7 @@ class BaseController extends Controller
                     'key' => $key,
                     'account' => $shop_account,
                     'amount' => $amount,
-                    'isShop' => $isShop]]);
+                    ]]);
 
                 return $response->getBody();
 
