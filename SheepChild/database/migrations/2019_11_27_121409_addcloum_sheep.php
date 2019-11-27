@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PutItems extends Migration
+class AddcloumSheep extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class PutItems extends Migration
      */
     public function up()
     {
-        Schema::table('items', function (Blueprint $table) {
-
-            $table->string('pic')->change();
+        Schema::table('sheep', function (Blueprint $table)
+        {
+            $table->unsignedInteger('lucky')->nullable();
         });
     }
 
@@ -26,8 +26,8 @@ class PutItems extends Migration
      */
     public function down()
     {
-        schema::table('items', function (Blueprint $table) {
-            $table->dropColumn('pic');
+        schema::table('sheep', function (Blueprint $table) {
+            $table->dropColumn('lucky');
         });
     }
 }
