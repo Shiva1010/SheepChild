@@ -78,9 +78,10 @@ Route::group(['middleware' => ['auth:wolf']], function() {
 
 // 羊的購買查詢
 Route::group(['middleware' => ['auth:sheep']],function (){
-   Route::get('/sheepitem/{sheep_id}','SheepItemController@index');       // (待確認）查看買家自身所有購買紀錄
-   Route::post('/sheepitem','SheepItemController@store');                // 買家購買商品
-   Route::get('/sheep/allbuy/{sheep_id}','SheepController@allbuy');      // 查看買家自身所有購買紀錄
+    Route::get('/sheepitem/{sheep_id}','SheepItemController@index');       // (待確認）查看買家自身所有購買紀錄
+    Route::post('/sheepitem','SheepItemController@store');                // 買家購買商品
+    Route::get('/sheep/allbuy/{sheep_id}','SheepController@allbuy');      // 查看買家自身所有購買紀錄
+    Route::post('/SheepSaveMoney','BaseController@SheepSaveMoney');       // 買家存款功能
 });
 
 

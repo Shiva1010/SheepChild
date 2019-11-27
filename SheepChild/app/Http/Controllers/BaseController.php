@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 //use App\Base;
+use App\Sheep;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
 {
@@ -62,6 +64,56 @@ class BaseController extends Controller
                 ]]);
 
         return $response->getBody();
+
+//            }else {
+
+//                $msg = Base::get();
+
+
+//                return response()->json(['msg' => 'done']);
+
+//            }
+    }
+
+    public function SheepSaveMoney(request $request)
+    {
+
+
+        $userID = $request['sheep_email'];
+        $key = $request['key'];
+        $amount =$request['amount'];
+
+        $sheep_id=Auth::user()->id;
+
+        $sheep=Sheep::where('id',$sheep_id)->first();
+
+        $balance=$sheep->balance;
+
+        $last_balance = $balance - $amount;
+
+        $sheep->update(['balance'=>$last_balance]);
+
+        $sheep_data=Sheep::where('id',$sheep_id)->first();
+
+
+        $http = new Client();
+        $response = $http->post('https://b555418b.ngrok.io/api/user/deposit',
+            ['form_params'=>[
+                'userID' => $userID,
+                'key' => $key,
+                'amount' => $amount
+            ]]);
+
+
+
+//        $getbody=json_decode($response->getBody()->getContents());
+        $getbody=$response->getBody()->getContents();
+//        echo $getbody;
+
+//        dd($response);
+
+
+        return response()->json(['msg' => '存款成功','Basemsg' => $getbody,'data'=> $sheep_data]);
 
 //            }else {
 
