@@ -13,14 +13,13 @@ class BaseController extends Controller
 
             $userID = $request['sheep_email'];
             $key = $request['key'];
-            $shop_account = 'arcadia@email.com';
+            $shop_account = 'arcadia@camp.com';
             $amount = 300;
 
 
 //            if (env('pass_status')) {
 
-                $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-                $out->writeln('index 有進來test路徑');
+
 
                 $http = new Client();
                 $response = $http->post('https://b555418b.ngrok.io/api/user/transfer',
@@ -53,8 +52,7 @@ class BaseController extends Controller
 
 //            if (env('pass_status')) {
 
-        $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        $out->writeln('index 有進來test路徑');
+
 
         $http = new Client();
         $response = $http->post('https://b555418b.ngrok.io/api/user/watch',
