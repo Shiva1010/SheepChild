@@ -71,6 +71,7 @@ class SheepController extends Controller
                     $lv03 = 10000;
                     $lv04 = 20000;
                     $lv05 = 30000;
+                    $max = -1;
 
 
                     if ($score < $lv01) {
@@ -82,7 +83,7 @@ class SheepController extends Controller
                             'msg' => '可愛的小綿羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 0,
                             'now_flower' => $now_sheep,
-                            'last_lv_score01' => $last_lv_score01,
+                            'last_lv' => $last_lv_score01,
                             ]);
 
                     }elseif ($score < $lv02) {
@@ -93,7 +94,7 @@ class SheepController extends Controller
                             'msg' => '可愛的小肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 1,
                             'now_flower' => $now_sheep,
-                            'last_lv_score02' => $last_lv_score02,
+                            'last_lv' => $last_lv_score02,
                             ]);
 
                     }elseif ($score < $lv03) {
@@ -104,7 +105,7 @@ class SheepController extends Controller
                             'msg' => '可愛的大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 2,
                             'now_flower' => $now_sheep,
-                            'last_lv_score03' => $last_lv_score03,
+                            'last_lv' => $last_lv_score03,
                             ]);
 
                     }elseif ($score < $lv04) {
@@ -115,7 +116,7 @@ class SheepController extends Controller
                             'msg' => '可愛的超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 3,
                             'now_flower' => $now_sheep,
-                            'last_lv_score04' => $last_lv_score04,
+                            'last_lv' => $last_lv_score04,
                             ]);
 
                     }elseif  ($score < $lv05) {
@@ -126,7 +127,7 @@ class SheepController extends Controller
                             'msg' => '可愛的無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 4,
                             'now_flower' => $now_sheep,
-                            'last_lv_score05' => $last_lv_score05,
+                            'last_lv' => $last_lv_score05,
                             ]);
 
                     }else {
@@ -134,7 +135,7 @@ class SheepController extends Controller
                             'msg' => '可愛的宇宙無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 5,
                             'now_flower' => $now_sheep,
-                            'last_lv_score05' => '目前已經是最高等級了',
+                            'last_lv' => $max,
                             ]);
 
                     }
