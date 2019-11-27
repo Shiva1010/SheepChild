@@ -25,7 +25,7 @@ class Sheep extends Authenticatable
     ];
 
     protected $hidden=[
-        'password', 'api_token'
+        'password',
     ];
 
     public function items()

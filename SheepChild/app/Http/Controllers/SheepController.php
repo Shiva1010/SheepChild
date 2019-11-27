@@ -82,9 +82,8 @@ class SheepController extends Controller
                         return response()->json([
                             'msg' => '可愛的小綿羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 0,
-                            'now_flower' => $now_sheep,
+                            'now_sheep' => $now_sheep,
                             'last_lv' => $last_lv_score01,
-                            'api_token' => $api_token,
                             ]);
 
                     }elseif ($score < $lv02) {
@@ -94,9 +93,8 @@ class SheepController extends Controller
                         return response()->json([
                             'msg' => '可愛的小肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 1,
-                            'now_flower' => $now_sheep,
+                            'now_sheep' => $now_sheep,
                             'last_lv' => $last_lv_score02,
-                            'api_token' => $api_token,
                             ]);
 
                     }elseif ($score < $lv03) {
@@ -106,9 +104,8 @@ class SheepController extends Controller
                         return response()->json([
                             'msg' => '可愛的大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 2,
-                            'now_flower' => $now_sheep,
+                            'now_sheep' => $now_sheep,
                             'last_lv' => $last_lv_score03,
-                            'api_token' => $api_token,
                             ]);
 
                     }elseif ($score < $lv04) {
@@ -118,9 +115,8 @@ class SheepController extends Controller
                         return response()->json([
                             'msg' => '可愛的超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 3,
-                            'now_flower' => $now_sheep,
+                            'now_sheep' => $now_sheep,
                             'last_lv' => $last_lv_score04,
-                            'api_token' => $api_token,
                             ]);
 
                     }elseif  ($score < $lv05) {
@@ -130,18 +126,16 @@ class SheepController extends Controller
                         return response()->json([
                             'msg' => '可愛的無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 4,
-                            'now_flower' => $now_sheep,
+                            'now_sheep' => $now_sheep,
                             'last_lv' => $last_lv_score05,
-                            'api_token' => $api_token,
                             ]);
 
                     }else {
                         return response()->json([
                             'msg' => '可愛的宇宙無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 5,
-                            'now_flower' => $now_sheep,
+                            'now_sheep' => $now_sheep,
                             'last_lv' => $max,
-                            'api_token' => $api_token,
                             ]);
 
                     }
