@@ -153,7 +153,7 @@ class SheepItemController extends Controller
 
                     $sheep['achevement'] = "恭喜得到深水炸彈！";//show respones
 
-                    return response()->json(['msg' => 'buy item success', 'data' => $sheep],555);
+                    return response()->json(['msg' => 'buy item success', 'data' => $sheep],201);
 
         } else
 
