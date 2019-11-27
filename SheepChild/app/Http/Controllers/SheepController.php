@@ -66,46 +66,79 @@ class SheepController extends Controller
 
                     $score = $now_sheep ->score;
 
-                    if ($score < 2000) {
+                    $lv01 = 2000;
+                    $lv02 = 5000;
+                    $lv03 = 10000;
+                    $lv04 = 20000;
+                    $lv05 = 30000;
+
+
+                    if ($score < $lv01) {
+
+
+                        $last_lv_score01 = $lv01 - $score;
 
                         return response()->json([
                             'msg' => '可愛的小綿羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 0,
                             'now_flower' => $now_sheep,
-                        ]);
+                            'last_lv_score01' => $last_lv_score01,
+                            ]);
 
-                    }elseif ($score < 5000) {
+                    }elseif ($score < $lv02) {
+
+                        $last_lv_score02 = $lv02 - $score;
+
                         return response()->json([
                             'msg' => '可愛的小肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 1,
                             'now_flower' => $now_sheep,
-                        ]);
-                    }elseif ($score < 10000) {
-                            return response()->json([
+                            'last_lv_score02' => $last_lv_score02,
+                            ]);
+
+                    }elseif ($score < $lv03) {
+
+                        $last_lv_score03 = $lv03 - $score;
+
+                        return response()->json([
                             'msg' => '可愛的大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 2,
                             'now_flower' => $now_sheep,
-                    ]);
+                            'last_lv_score03' => $last_lv_score03,
+                            ]);
 
-                    }elseif ($score < 20000) {
+                    }elseif ($score < $lv04) {
+
+                        $last_lv_score04 = $lv04 - $score;
+
                         return response()->json([
                             'msg' => '可愛的超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 3,
                             'now_flower' => $now_sheep,
-                        ]);
-                    }elseif  ($score < 30000) {
+                            'last_lv_score04' => $last_lv_score04,
+                            ]);
+
+                    }elseif  ($score < $lv05) {
+
+                        $last_lv_score05 = $lv05 - $score;
+
                         return response()->json([
                             'msg' => '可愛的無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 4,
                             'now_flower' => $now_sheep,
-                        ]);
+                            'last_lv_score05' => $last_lv_score05,
+                            ]);
+
                     }else {
                         return response()->json([
                             'msg' => '可愛的宇宙無敵超級大肥羊，歡迎光臨，今天想要買點什麼呢？',
                             'lv' => 5,
                             'now_flower' => $now_sheep,
-                        ]);
+                            'last_lv_score05' => '目前已經是最高等級了',
+                            ]);
+
                     }
+
                 } else {
 
                     return response()->json(['msg' => '密碼錯誤'],403);
