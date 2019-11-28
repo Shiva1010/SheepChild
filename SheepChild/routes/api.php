@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth:sheep']],function (){
     Route::post('/sheepitem','SheepItemController@store');                // 買家購買商品
     Route::get('/sheep/allbuy/{sheep_id}','SheepController@allbuy');      // 查看買家自身所有購買紀錄
     Route::post('/SheepSaveMoney','BaseController@SheepSaveMoney');       // 買家存款功能
+    Route::get('/sheepdata','SheepController@show');       // 買家存款功能
 });
 
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class SheepController extends Controller
@@ -231,9 +232,88 @@ class SheepController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $sheep_id = Auth::user()->id;
+        $sheep_data =Sheep::where('id',$sheep_id)->first();
+
+        $score = $sheep_data ->score;
+
+        $lv01 = 2000;
+        $lv02 = 5000;
+        $lv03 = 10000;
+        $lv04 = 20000;
+        $lv05 = 30000;
+        $max = -1;
+
+
+        if ($score < $lv01) {
+
+
+            $last_lv_score01 = $lv01 - $score;
+
+            return response()->json([
+                'msg' => '目前小綿羊的資訊',
+                'lv' => 0,
+                'now_sheep' => $sheep_data,
+                'last_lv' => $last_lv_score01,
+            ]);
+
+        }elseif ($score < $lv02) {
+
+            $last_lv_score02 = $lv02 - $score;
+
+            return response()->json([
+                'msg' => '目前小綿羊的資訊',
+                'lv' => 1,
+                'now_sheep' => $now_sheep,
+                'last_lv' => $last_lv_score02,
+            ]);
+
+        }elseif ($score < $lv03) {
+
+            $last_lv_score03 = $lv03 - $score;
+
+            return response()->json([
+                'msg' => '目前小綿羊的資訊',
+                'lv' => 2,
+                'now_sheep' => $sheep_data,
+                'last_lv' => $last_lv_score03,
+            ]);
+
+        }elseif ($score < $lv04) {
+
+            $last_lv_score04 = $lv04 - $score;
+
+            return response()->json([
+                'msg' => '目前小綿羊的資訊',
+                'lv' => 3,
+                'now_sheep' =>$sheep_data,
+                'last_lv' => $last_lv_score04,
+            ]);
+
+        }elseif  ($score < $lv05) {
+
+            $last_lv_score05 = $lv05 - $score;
+
+            return response()->json([
+                'msg' => '目前小綿羊的資訊',
+                'lv' => 4,
+                'now_sheep' => $sheep_data,
+                'last_lv' => $last_lv_score05,
+            ]);
+
+        }else {
+            return response()->json([
+                'msg' => '目前小綿羊的資訊',
+                'lv' => 5,
+                'now_sheep' => $sheep_data,
+                'last_lv' => $max,
+            ]);
+
+        }
+
+
     }
 
     public function allbuy($sheep_id)
