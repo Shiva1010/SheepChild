@@ -96,27 +96,27 @@ class SheepItemController extends Controller
         $total = $request->stock * $item->price;
 
 
-        $userID = $request['sheep_email'];
-        $key = $request['key'];
-        $shop_account = 'arcadia@camp.com';
-        $amount = 300;
-
-
-//            if (env('pass_status')) {
-
-
-
-        $http = new Client();
-        $response = $http->post('https://b555418b.ngrok.io/api/user/transfer',
-            ['form_params'=>[
-                'userID' => $userID,
-                'key' => $key,
-                'account' => $shop_account,
-                'amount' => $amount,
-            ]]);
-
-         $response->getBody();
-         dd($response);
+//        $userID = $request['sheep_email'];
+//        $key = $request['key'];
+//        $shop_account = 'arcadia@camp.com';
+//        $amount = 300;
+//
+//
+////            if (env('pass_status')) {
+//
+//
+//
+//        $http = new Client();
+//        $response = $http->post('https://b555418b.ngrok.io/api/user/transfer',
+//            ['form_params'=>[
+//                'userID' => $userID,
+//                'key' => $key,
+//                'account' => $shop_account,
+//                'amount' => $amount,
+//            ]]);
+//
+//         $response->getBody();
+//         dd($response);
 
 
         DB::transaction(function () use ($request, $item, $total, $stockResult, $sheep, $wolf){
