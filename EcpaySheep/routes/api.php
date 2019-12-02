@@ -13,6 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
+
+Auth::routes(['verify' => true]);
+
+Route::get('profile', function () {
+    return "my email";
+})->middleware('verified');
+
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
