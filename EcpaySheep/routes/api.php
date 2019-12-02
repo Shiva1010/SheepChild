@@ -90,3 +90,8 @@ Route::group(['middleware' => ['auth:sheep']],function (){
 Route::post('/userbuy','BaseController@userbuy');
 
 Route::post('/SheepBaseBalance','BaseController@SheepBaseBalance');
+
+Route::post('/EcpayDemo','SheepItemController@EcpayDemo');
+Route::get('/EcpayClientBack','SheepItemController@EcpayClientBack');
+Route::get('/EcpayReturnURL','SheepItemController@EcpayReturnURL');
+

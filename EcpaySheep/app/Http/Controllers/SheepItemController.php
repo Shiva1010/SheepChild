@@ -10,11 +10,74 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
-
+use Ecpay;
+use ECPay_AllInOne;
 
 
 class SheepItemController extends Controller
 {
+
+
+    public function EcpayReturnURL()
+    {
+
+        return response()->json(['msg' => '已收款，可出貨']);
+
+    }
+
+    public function EcpayClientBack()
+    {
+
+        return response()->json(['msg' => '結完帳後回到了首頁']);
+
+    }
+
+
+    public function EcpayDemo(request $request)
+    {
+
+        $Ecpay = new ECPay_AllInOne();
+
+
+
+//        include('ECPay.Payment.Integration.php');
+
+        $amount = $request['amount'];
+
+        //基本參數(可依系統規劃自行調整)
+        $Ecpay->Send['ReturnURL']         = "http://b37ed050.ngrok.io/api/EcpayReturnURL" ;
+        //交易結果回報的網址
+        $Ecpay->Send['ClientBackURL']     = "http://b37ed050.ngrok.io/api/ClientBackURL" ;
+        //交易結束，讓user導回的網址
+        $Ecpay->Send['MerchantTradeNo']   = "Test".time() ;           //訂單編號
+        $Ecpay->Send['MerchantTradeDate'] = date('Y/m/d H:i:s');      //交易時間
+        $Ecpay->Send['TotalAmount']       = $amount;                     //交易金額
+        $Ecpay->Send['TradeDesc']         = "good to drink" ;         //交易描述
+        $Ecpay->Send['EncryptType']      = '1' ;
+        $Ecpay->Send['ChoosePayment']     = "Credit" ;     //付款方式:信用卡
+        $Ecpay->Send['PaymentType']        = 'aio' ;
+
+//        訂單的商品資料
+//        array_push($Ecpay->Send['Items'],
+//            array('Name' => "美美小包包",
+//                'Price' => (int)"2000",
+//                'Currency' => "元",
+//                'Quantity' => (int) "1",
+//                'URL' => "http://www.yourwebsites.com.tw/Product"));
+
+        //Go to EcPay
+        echo "線上刷卡頁面導向中...";
+//        echo Ecpay::i()->CheckOutForm();
+
+        //開發階段，如果你希望看到表單的內容，可以改為以下敘述：
+//        echo $Ecpay->CheckOutForm('按我，才送出');
+        echo $Ecpay->QueryTradet();
+
+    }
+
+
+
+
     /**
      * Display a listing of the resource.
      *

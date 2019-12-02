@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+        Eddy7697\Ecpay2in1\Ecpay2in1ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -228,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Ecpay' => Eddy7697\Ecpay2in1\Facades\Ecpay::class,
 
 
     ],

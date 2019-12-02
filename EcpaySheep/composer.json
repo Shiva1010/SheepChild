@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "doctrine/dbal": "^2.10",
+        "eddy7697/ecpay2in1": "dev-master",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.4",
         "intervention/image": "^2.5",

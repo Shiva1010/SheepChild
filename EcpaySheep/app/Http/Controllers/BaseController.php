@@ -106,8 +106,8 @@ class BaseController extends Controller
 
 
 
-//        $getbody=json_decode($response->getBody()->getContents());
-        $getbody=$response->getBody()->getContents();
+        $getbody=json_decode($response->getBody()->getContents());
+//        $getbody=$response->getBody()->getContents();
 //        echo $getbody;
 
 //        dd($response);
