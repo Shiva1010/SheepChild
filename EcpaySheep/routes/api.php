@@ -45,6 +45,16 @@ Route::get('/sorts','SortController@index');               // 查看所有商品
 Route::post('/register','SheepController@store');
 Route::post('/login','SheepController@login');
 
+// 羊的 email 身份驗證
+Route::group(['middleware' => 'auth:'], function () {
+    Route::get('/person/{person}');
+    Route::get('/test_shop/new_object');
+});
+
+Route::get('profile', function () {
+    return "my email";
+})->middleware('verified');
+
 
 // 狼（店家）的登入
 Route::post('/wolf/register','WolfController@store');

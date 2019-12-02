@@ -16,6 +16,20 @@ use Illuminate\Support\Facades\Auth;
 
 class SheepController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+    }
+
+    public function index()
+    {
+
+    }
+
+
+
     public function login(Request $request)
     {
 
@@ -154,15 +168,6 @@ class SheepController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -170,34 +175,77 @@ class SheepController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+//    public function store(Request $request)
+//    {
+//        // 確認是否有相同 account
+//        $check_account =Sheep::where('account', $request->account)->first();
+//
+//        // 如果未註冊，則進入驗證資料是否符合格式跟創建會員資料
+//        if($check_account == null) {
+//
+//            $rules = [
+//                'name' => ['required', 'string','max:30'],
+//                'account' => ['required', 'string', 'max:20'],
+//                'password' => ['required', 'string', 'min:8', 'max:20'],
+//                'email' => ['required', 'string', 'email'],
+//            ];
+//
+//
+//            $input = request()->all();
+//
+//            // 驗證請求資料規則是否符合
+//            $validator = Validator::make($input, $rules);
+//
+//            if ($validator->fails()) {
+//
+//                return response()->json(['msg' => $validator->errors()]);
+//
+//            } else {
+//
+//                $api_token = Str::random(10);
+//
+//                // 店家預設註冊給 1000000 元
+//                $balance = 5000;
+//                $score = 0;
+//
+//
+//
+//                // hash password
+//                $HashPwd = Hash::make($request['password']);
+//
+//                $create = Sheep::create([
+//                    'name' => $request['name'],
+//                    'account' => $request['account'],
+//                    'password' => $HashPwd,
+//                    'email' => $request['email'],
+//                    'balance' => $balance,
+//                    'api_token' => $api_token,
+//                    'score' => $score,
+//                ]);
+//
+//                return response()->json([
+//                    'msg' => '可愛的肥羊，註冊成功',
+//                    'create_date' => $create,
+//                ]);
+//            }
+//
+//        } else {
+//            return response()->json(['msg' => '此帳戶已被註冊'],403);
+//        }
+//    }
+
+
+
+
     public function store(Request $request)
     {
-        // 確認是否有相同 account
-        $check_account =Sheep::where('account', $request->account)->first();
 
-        // 如果未註冊，則進入驗證資料是否符合格式跟創建會員資料
-        if($check_account == null) {
 
-            $rules = [
-                'name' => ['required', 'string','max:30'],
-                'account' => ['required', 'string', 'max:20'],
-                'password' => ['required', 'string', 'min:8', 'max:20'],
-            ];
 
-            $input = request()->all();
-
-            // 驗證請求資料規則是否符合
-            $validator = Validator::make($input, $rules);
-
-            if ($validator->fails()) {
-
-                return response()->json(['msg' => $validator->errors()]);
-
-            } else {
 
                 $api_token = Str::random(10);
 
-                // 店家預設註冊給 1000000 元
+
                 $balance = 5000;
                 $score = 0;
 
@@ -209,7 +257,8 @@ class SheepController extends Controller
                 $create = Sheep::create([
                     'name' => $request['name'],
                     'account' => $request['account'],
-                    'password' => $HashPwd,
+                    'password' =>$request['password'],
+                    'email' => $request['email'],
                     'balance' => $balance,
                     'api_token' => $api_token,
                     'score' => $score,
@@ -219,12 +268,12 @@ class SheepController extends Controller
                     'msg' => '可愛的肥羊，註冊成功',
                     'create_date' => $create,
                 ]);
-            }
 
-        } else {
-            return response()->json(['msg' => '此帳戶已被註冊'],403);
-        }
     }
+
+
+
+
 
     /**
      * Display the specified resource.
