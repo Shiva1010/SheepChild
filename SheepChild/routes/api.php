@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth:wolf']], function() {
     Route::get('/wolf/sheepitem','SheepItemController@index');        // 查看所有購買紀錄
     Route::post('/sorts','SortController@store');
     Route::get('/wolfitem','WolfItemController@selltotal');           // 查詢目前總銷售記錄
+    Route::put('/GiveMeMoney','WolfController@GiveMeMoney');          // 送錢祕技，每次 500 元
+
 });
    Route::get('/sheepitem/{sheep_id}','SheepItemController@index');             // 查看買家自身所有購買紀錄
     Route::get('/sheep/allbuy/{sheep_id}','SheepController@allbuy');      // 查看買家自身所有購買紀錄

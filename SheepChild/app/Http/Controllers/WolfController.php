@@ -82,7 +82,28 @@ class WolfController extends Controller
         }
     }
 
+    public function GiveMeMoney(Request $request)
+    {
 
+        $api_token=$request['api_token'];
+
+
+        $check_token = Wolf::where('api_token', $api_token)->first();
+
+
+        $balance = $check_token['balance'];
+
+        $bonus =500;
+
+        $after_balance = $balance + $bonus;
+
+        $check_token->update(['balance' => $after_balance]);
+
+        $now_wolf = Wolf::where('api_token', $api_token)->first();
+
+
+        return response()->json(['msg'=>'快點給我錢','now_wolf'=>$now_wolf]);
+    }
 
     /**
      * Display a listing of the resource.
