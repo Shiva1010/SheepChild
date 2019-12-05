@@ -62,7 +62,7 @@ Route::get('/showitems/{item_id}','ItemController@showitem');
 
 
 
-// 只有狼可以新增、修改、刪除商品
+// 只有狼可以新增、修改、刪除商品，回覆留言、查看所有留言
 Route::group(['middleware' => ['auth:wolf']], function() {
     Route::post('/wolf/items', 'ItemController@store');               // 店家新增商品
     Route::put('/wolf/items/{id}', 'ItemController@update');          // 店家修改商品
@@ -71,10 +71,16 @@ Route::group(['middleware' => ['auth:wolf']], function() {
     Route::get('/wolf/sheepitem','SheepItemController@index');        // 查看所有購買紀錄
     Route::post('/sorts','SortController@store');
     Route::get('/wolfitem','WolfItemController@selltotal');           // 查詢目前總銷售記錄
+<<<<<<< Updated upstream
     Route::put('/GiveMeMoney','WolfController@GiveMeMoney');          // 送錢祕技，每次 500 元
+=======
+
+    Route::put('/wolfreplay','BoardController@wolfreplay');                  // 回覆留言
+    Route::get('/allmsg','BoardController@allmsg');                   // 查看所有顧客留言
+>>>>>>> Stashed changes
 
 });
-   Route::get('/sheepitem/{sheep_id}','SheepItemController@index');             // 查看買家自身所有購買紀錄
+Route::get('/sheepitem/{sheep_id}','SheepItemController@index');             // 查看買家自身所有購買紀錄
     Route::get('/sheep/allbuy/{sheep_id}','SheepController@allbuy');      // 查看買家自身所有購買紀錄
 
 
@@ -86,6 +92,9 @@ Route::group(['middleware' => ['auth:sheep']],function (){
     Route::get('/sheep/allbuy/{sheep_id}','SheepController@allbuy');      // 查看買家自身所有購買紀錄
     Route::post('/SheepSaveMoney','BaseController@SheepSaveMoney');       // 買家存款功能
     Route::get('/sheepdata','SheepController@show');       // 買家存款功能
+
+    Route::post('/newsheepmsg','BoardController@newsheepmsg');            // 新增留言
+    Route::get('/oldsheepmsg','BoardController@oldsheepmsg');             // 查詢自己的留言
 });
 
 

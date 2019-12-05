@@ -38,4 +38,9 @@ class Sheep extends Authenticatable
         return $this->belongsToMany('App\Item')->wherePivot(['item_name', 1]);
     }
 
+    public function board()
+    {
+        return $this->hasMany('App\Board');
+    }
+
 }
