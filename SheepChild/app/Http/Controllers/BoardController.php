@@ -46,7 +46,7 @@ class BoardController extends Controller
     {
         $sheep_id = Auth::user()->id;
         $sheep_data = Auth::user()->where('id',$sheep_id)->first();
-        $sheepallmsg = Board::where('sheep_id',$sheep_id)->get();
+        $sheepallmsg = Board::where('sheep_id',$sheep_id)->orderBy('id','desc')->get();
 
         return response() ->json(['msg' => '目前的留言狀況','sheep' => $sheep_data, 'sheepallmsg' => $sheepallmsg]);
 
@@ -80,7 +80,7 @@ class BoardController extends Controller
     public function  allmsg()
     {
 
-        $allmsg=Board::get();
+        $allmsg=Board::orderBy('id','desc')->get();
 
         return response()->json(['msg' => '目前所有小羊的留言', 'allmsg' => $allmsg]);
     }
