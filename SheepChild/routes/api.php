@@ -71,13 +71,13 @@ Route::group(['middleware' => ['auth:wolf']], function() {
     Route::get('/wolf/sheepitem','SheepItemController@index');        // 查看所有購買紀錄
     Route::post('/sorts','SortController@store');
     Route::get('/wolfitem','WolfItemController@selltotal');           // 查詢目前總銷售記錄
-<<<<<<< Updated upstream
+
     Route::put('/GiveMeMoney','WolfController@GiveMeMoney');          // 送錢祕技，每次 500 元
-=======
+
 
     Route::put('/wolfreplay','BoardController@wolfreplay');                  // 回覆留言
     Route::get('/allmsg','BoardController@allmsg');                   // 查看所有顧客留言
->>>>>>> Stashed changes
+
 
 });
 Route::get('/sheepitem/{sheep_id}','SheepItemController@index');             // 查看買家自身所有購買紀錄
