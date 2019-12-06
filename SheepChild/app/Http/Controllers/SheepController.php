@@ -268,7 +268,7 @@ class SheepController extends Controller
             return response()->json([
                 'msg' => '目前小綿羊的資訊',
                 'lv' => 1,
-                'now_sheep' => $now_sheep,
+                'now_sheep' => $sheep_data,
                 'last_lv' => $last_lv_score02,
             ]);
 
