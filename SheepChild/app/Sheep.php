@@ -21,7 +21,7 @@ class Sheep extends Authenticatable
 
 
     protected $fillable=[
-        'name','account','api_token','balance','password','score'
+        'name','account','api_token','balance','password','score','type'
     ];
 
     protected $hidden=[

@@ -182,6 +182,7 @@ class SheepController extends Controller
                 'name' => ['required', 'string','max:30'],
                 'account' => ['required', 'string', 'max:20'],
                 'password' => ['required', 'string', 'min:8', 'max:20'],
+                'type' => ['required','string'],
             ];
 
             $input = request()->all();
@@ -213,6 +214,7 @@ class SheepController extends Controller
                     'balance' => $balance,
                     'api_token' => $api_token,
                     'score' => $score,
+                    'type' => $request['type'],
                 ]);
 
                 return response()->json([
