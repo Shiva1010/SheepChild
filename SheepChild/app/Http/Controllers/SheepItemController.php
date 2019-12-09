@@ -137,7 +137,7 @@ class SheepItemController extends Controller
         $achieve1 = DB::table('item_sheep')->where(function($query)use ($sheep){
 
             $query->Where('sheep_id', '=', $sheep->id);
-            $query->Where('item_id', '=', '90');
+            $query->Where('item_id', '=', '166');
 
 
         })->get();
