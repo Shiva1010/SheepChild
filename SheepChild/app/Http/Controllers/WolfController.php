@@ -56,7 +56,7 @@ class WolfController extends Controller
                 if (Hash::check($pwd, $hash_password)) {
 
 
-                    $balance = $check_account['balance'];
+                    $check_account['balance'];
 
 
                     $api_token = Str::random(10);
@@ -93,7 +93,7 @@ class WolfController extends Controller
 
         $balance = $check_token['balance'];
 
-        $bonus =500;
+        $bonus = 500;
 
         $after_balance = $balance + $bonus;
 

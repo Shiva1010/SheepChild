@@ -6,7 +6,9 @@ use App\Board;
 use App\Sheep;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class BoardController extends Controller
 {
@@ -80,7 +82,21 @@ class BoardController extends Controller
     public function  allmsg()
     {
 
-        $allmsg=Board::orderBy('id','desc')->get();
+
+
+        $allmsg = DB::table('boards')
+            ->join('sheep','boards.sheep_id','=','sheep.id')
+            ->orderBy('boards.id','desc')
+            ->get();
+
+
+//        $users = DB::table('users')
+//            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+//            ->join('orders', 'users.id', '=', 'orders.user_id')
+//            ->select('users.*', 'contacts.phone', 'orders.price')
+//            ->get();
+
+//        $allmsg=Board::orderBy('id','desc')->get();
 
         return response()->json(['msg' => '目前所有小羊的留言', 'allmsg' => $allmsg]);
     }
