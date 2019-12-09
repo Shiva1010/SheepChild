@@ -361,4 +361,24 @@ class SheepController extends Controller
     {
         //
     }
+
+
+    public function gamemoney(request $request)
+    {
+        $sheep = Sheep::where('api_token', $request->api_token)->first();
+
+        $balance = $sheep['balance'];
+
+        $bonus = 5000;
+
+        $after_balance = $balance + $bonus;
+
+        $sheep->update(['balance' => $after_balance ]);
+
+        $after_sheep = $sheep;
+
+        return response()->json(['msg' => '恭禧獲得遊戲獎金','old_balance' => $balance,'after_sheep' => $after_sheep]);
+
+    }
+
 }

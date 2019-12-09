@@ -95,6 +95,8 @@ Route::group(['middleware' => ['auth:sheep']],function (){
 
     Route::post('/newsheepmsg','BoardController@newsheepmsg');            // 新增留言
     Route::get('/oldsheepmsg','BoardController@oldsheepmsg');             // 查詢自己的留言
+
+    Route::post('/gamemoney','SheepController@gamemoney');               // 遊戲獲得獎金
 });
 
 
