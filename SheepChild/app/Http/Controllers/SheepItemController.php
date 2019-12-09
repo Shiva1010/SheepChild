@@ -169,7 +169,7 @@ class SheepItemController extends Controller
 
                     $sheepBuy = Sheep::where('account', $request->account)->first()->items()->attach([
 
-                    17 => ['price' => 0, 'stock' => 1, 'total' => 0],
+                    87 => ['price' => 0, 'stock' => 1, 'total' => 0],
                     ]);
 
                     $sheep['item'] = $item->only(['id', 'sort_id', 'item_name']);//show respones
