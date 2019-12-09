@@ -85,9 +85,27 @@ class BoardController extends Controller
 
 
         $allmsg = DB::table('boards')
-            ->join('sheep','boards.sheep_id','=','sheep.id')
+            ->join('sheep','boards.sheep_id','sheep.id')
+            ->select('boards.*','sheep.account','sheep.name','sheep.type','sheep.score')
             ->orderBy('boards.id','desc')
             ->get();
+
+
+//
+//        $allmsg = DB::table('boards')
+//            ->join('sheep',function ($join){
+//                $join ->on('boards.sheep_id','=','sheep','sheep.id')
+//                ->orderBy('boards.id','desc');
+//            })
+////
+//            ->get();
+
+//        DB::table('users')
+//            ->join('contacts', function ($join) {
+//                $join->on('users.id', '=', 'contacts.user_id')
+//                    ->where('contacts.user_id', '>', 5);
+//            })
+//            ->get();
 
 
 //        $users = DB::table('users')
